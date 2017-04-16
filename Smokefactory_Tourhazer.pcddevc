@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="par56silber.png">
+
+ <information id="PC_DIMMER">
+	 <name>Tourhazer 2</name>
+	 <vendor>Smoke Factory</vendor>
+	 <author>Eddie Greiner-Petter</author>
+	 <description>Gerät verfügt nur über zwei-Kanal-Modus</description>
+ </information>
+ 
+ <channels>
+	 <function channel="0" minvalue="0" maxvalue="255" name="Pumpe" fade="yes" type="fog"/>
+	 <function channel="1" minvalue="0" maxvalue="255" name="Lüfter" fade="yes" type="volume"/>
+ </channels>
+ <initvalues ch0="-1" ch1="-1" />
+ <fog OffValue="0" MaxValue="255"/>
+
+ <form width="420" height="130">
+  <deviceimage top="0" left="0" width="0" height="0"/>
+  <devicename top="10" left="10"/>
+  <deviceadress top="30" left="10"/>
+  
+  <button name="btn_both_on" top="10" left="240" width="80" height="30" action="BOTHon" caption="Beides 100%"/>
+  <button name="btn_both_off" top="10" left="330" width="80" height="30" action="BOTHoff" caption="Beides aus"/>
+  
+  <button name="btn_fog_off" top="50" left="10" width="80" height="30" action="FOGoff" caption="Pumpe aus"/>
+  <slider name="slider_fog" top="50" left="100" width="220" height="30" action="FOGchange" startvalue="0" endvalue="255" default="0"/>
+  <button name="btn_fog_on" top="50" left="330" width="80" height="30" action="FOGon" caption="Pumpe 100%"/>
+  
+  <button name="btn_volume_off" top="90" left="10" width="80" height="30" action="VOLUMEoff" caption="Lüfter aus"/>
+  <slider name="slider_volume" top="90" left="100" width="220" height="30" action="VOLUMEchange" startvalue="0" endvalue="255" default="0"/>
+  <button name="btn_volume_on" top="90" left="330" width="80" height="30" action="VOLUMEon" caption="Lüfter 100%"/>
+ </form>
+ 
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+  procedure InitDevice(Device: String);
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+  procedure BOTHon;
+  procedure BOTHoff;
+  procedure FOGon;
+  procedure FOGchange;
+  procedure FOGoff;
+  procedure VOLUMEon;
+  procedure VOLUMEchange;
+  procedure VOLUMEoff;
+
+  implementation
+
+  procedure InitDevice(Device: String);  begin end;
+  procedure FormShow;  begin  end;
+  procedure FormRefresh(channel:Integer);  begin end;
+  procedure FormClose;  begin end;
+  
+  procedure BOTHon;
+  begin
+	FOGon;
+	VOLUMEon;
+  end;
+  
+  procedure BOTHoff;
+  begin
+	FOGoff;
+	VOLUMEoff;
+  end;
+  
+  
+  procedure FOGon;
+  begin
+	set_channel('FOG',-1,255,0,0);
+	slider_fog.position:=255;
+  end;
+  
+  procedure FOGchange;
+  begin
+	set_channel('FOG',-1,slider_fog.position,0,0);
+  end;
+  
+  procedure FOGoff;
+  begin
+	set_channel('FOG',-1,0,0,0);
+	slider_fog.position:=0;
+  end;
+
+  procedure VOLUMEon;
+  begin
+	set_channel('VOLUME',-1,255,0,0);
+	slider_volume.position:=255;
+  end;
+  
+  procedure VOLUMEchange;
+  begin
+	set_channel('VOLUME',-1,slider_volume.position,0,0);
+  end;
+  
+  procedure VOLUMEoff;
+  begin
+	set_channel('VOLUME',-1,0,0,0);
+	slider_volume.position:=0;
+  end;
+  end.
+ </code>
+</device>

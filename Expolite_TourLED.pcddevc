@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="ledpar64.png">
+ <information id="PC_DIMMER">
+ <name>TourLED</name>
+ <vendor>Expolite</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>Expolite alle Tourleds, 5-Kanal-Modus</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Dimmer" fade="yes" type="dimmer"/>
+  <function channel="1" minvalue="0" maxvalue="255" name="Rot" fade="yes" type="r"/>
+  <function channel="2" minvalue="0" maxvalue="255" name="Grün" fade="yes" type="g"/>
+  <function channel="3" minvalue="0" maxvalue="255" name="Blau" fade="yes" type="b"/>
+  <function channel="4" minvalue="0" maxvalue="255" name="Strobo" fade="yes" type="shutter"/>
+ </channels>
+ <initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" ch4="-1" />
+ <shutter OpenValue="255" CloseValue="0" ChannelName="shutter"/>
+ <strobe OffValue="0" MinValue="0" MaxValue="255" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+
+<form width="490" height="210">
+
+  <deviceimage top="10" left="10" width="64" height="64"/>
+  <devicename top="16" left="80"/>
+  <deviceadress top="32" left="80"/>
+
+  <colorpicker top="65" left="330" />
+
+  <label name="dimmerlabel" top="80" left="10" width="35" height="13" caption="Dimmer"/>
+  <slider name="dimmerfader" top="96" left="10" width="310" height="17" action="dimmerchange" startvalue="0" endvalue="255" default="0"/>
+
+  <label name="strobolabel" top="120" left="10" width="61" height="13" caption="Stroboeffekt"/>
+  <slider name="strobofader" top="136" left="10" width="310" height="17" action="shutterchange" startvalue="0" endvalue="255" default="0"/>
+
+  <button name="dimmeroff" top="160" left="10" width="70" height="40" action="dimmeroffclick" caption="Dimmer 0%"/>
+  <button name="dimmeron" top="160" left="90" width="70" height="40" action="dimmeronclick" caption="Dimmer 100%"/>
+
+  <button name="strobooff" top="160" left="170" width="70" height="40" action="strobooffclick" caption="Strobo 0%"/>
+  <button name="stroboon" top="160" left="250" width="70" height="40" action="stroboonclick" caption="Strobo 100%"/>
+    
+ </form>
+ 
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+  procedure FormShow;
+  procedure FormClose;
+  procedure FormRefresh(channel:Integer);
+    
+  procedure ColorPickerChange(R, G, B: Byte);
+  
+  procedure dimmerchange;
+  procedure dimmeronclick;
+  procedure dimmeroffclick;
+  
+  procedure shutterchange;
+  procedure stroboonclick;
+  procedure strobooffclick;
+  implementation
+
+  var
+   DontRefresh:boolean;
+
+  procedure FormShow;
+  begin
+  end;
+
+  procedure FormClose;
+  begin
+  end;
+
+  procedure FormRefresh(channel:Integer);
+  var
+    Value:integer;
+    r,phi,temp:Double;
+  begin
+    if not DontRefresh then
+    case channel of
+      0:
+      begin
+        dimmerfader.position:=get_channel('dimmer');
+      end;
+	  
+      1: begin end;
+      2: begin end;
+      3: begin end;
+	  
+      4:
+      begin
+		strobofader.position:=get_channel('shutter');
+      end;
+	  
+    end;
+    DontRefresh:=false;
+  end;
+
+  procedure ColorPickerChange(R, G, B: Byte);
+  begin
+    set_channel('r',-1,r,0);
+    set_channel('g',-1,g,0);
+    set_channel('b',-1,b,0);
+  end;
+
+  // DIMMER
+	procedure dimmerchange;
+	begin
+		DontRefresh:=true;
+		set_channel('dimmer',-1,dimmerfader.position,0);
+	end;
+  
+	procedure dimmeronclick;
+    begin
+      set_channel('dimmer',-1,255,0);
+      dimmerfader.position:=get_channel('dimmer');
+    end;
+ 
+	procedure dimmeroffclick;
+    begin
+     set_channel('dimmer',-1,0,0);
+     dimmerfader.position:=get_channel('dimmer');
+    end;
+
+  // STROBO
+	procedure shutterchange;
+	begin
+		DontRefresh:=true;
+		set_channel('shutter',-1,strobofader.position,0);
+	end;
+	
+	procedure stroboonclick;
+    begin
+      set_channel('shutter',-1,255,0);
+      strobofader.position:=get_channel('shutter');
+    end;
+ 
+	procedure strobooffclick;
+    begin
+     set_channel('shutter',-1,0,0);
+     strobofader.position:=get_channel('shutter');
+    end;
+end.
+ </code>
+</device>

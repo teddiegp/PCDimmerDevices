@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="64 x 64\Washer">
+ <information id="PC_DIMMER">
+ <name>Impression 120 RZ</name>
+ <vendor>GLP</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>GLP Impression RGB 120 RZ</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Pan" fade="yes" type="pan"/>
+  <function channel="1" minvalue="0" maxvalue="255" name="Panfine" fade="yes" type="panfine"/>
+  <function channel="2" minvalue="0" maxvalue="255" name="Tilt" fade="yes" type="tilt"/>
+  <function channel="3" minvalue="0" maxvalue="255" name="Tiltfine" fade="yes" type="tiltfine"/>
+  <function channel="4" minvalue="0" maxvalue="255" name="Farben" fade="no" type="color1"/>
+  <function channel="5" minvalue="0" maxvalue="255" name="Rot" fade="yes" type="r"/>
+  <function channel="6" minvalue="0" maxvalue="255" name="Grün" fade="yes" type="g"/>
+  <function channel="7" minvalue="0" maxvalue="255" name="Blau" fade="yes" type="b"/>
+  <function channel="8" minvalue="0" maxvalue="255" name="Shutter/Strobo" fade="yes" type="shutter"/>
+  <function channel="9" minvalue="0" maxvalue="255" name="Dimmer" fade="yes" type="dimmer"/>
+  <function channel="10" minvalue="0" maxvalue="255" name="Farbtempratur" fade="yes" type="special9"/>
+  <function channel="11" minvalue="0" maxvalue="255" name="Speziel/Reserve" fade="yes" type="special2"/>
+  <function channel="12" minvalue="0" maxvalue="255" name="Movement" fade="yes" type="moves"/>
+  <function channel="13" minvalue="0" maxvalue="255" name="Speed" fade="yes" type="speed"/>
+  <function channel="14" minvalue="0" maxvalue="255" name="Zoom" fade="yes" type="zoom"/>
+ </channels>
+ 
+ <initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" ch4="-1" ch5="-1" ch6="-1" ch7="-1" ch8="-1" ch9="-1" ch10="-1" ch11="-1" ch12="-1" ch13="-1" ch14="-1" />
+ 
+ <shutter OpenValue="255" CloseValue="0" ChannelName="shutter"/>
+ <strobe OffValue="255" MinValue="200" MaxValue="239" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+
+ 
+ <form width="100" height="210">
+  <deviceimage top="0" left="0" width="0" height="0"/>
+  <devicename top="10" left="10"/>
+  <deviceadress top="30" left="10"/>
+ </form>
+ 
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+    
+  implementation
+
+  procedure FormShow; begin end;
+  procedure FormRefresh(channel:Integer); begin end;
+  procedure FormClose; begin end;
+ 
+  end.
+ </code>
+</device>

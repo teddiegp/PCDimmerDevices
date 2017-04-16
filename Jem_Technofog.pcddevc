@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="64 x 64\nebelmaschine.png">
+ <information id="PC_DIMMER">
+ <name>Technofog DMX</name>
+ <vendor>JEM</vendor>
+ <author>Felix Heppner</author>
+ <description>Nebelmaschine mit regulierbarem Ausstoß und Timer. DMX Interface by Tobias Steinmann</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Nebelausstoß" fade="yes" type="dimmer"/>
+  <function channel="1" minvalue="0" maxvalue="255" name="SHUTTER" fade="no" type="shutter"/>
+  <function channel="2" minvalue="0" maxvalue="255" name="SPECIAL1" fade="yes" type="special1"/>
+  <function channel="3" minvalue="0" maxvalue="255" name="SPECIAL2" fade="yes" type="special2"/>
+ </channels>
+ <amber UseAmberMixing="yes" AmberMixingCompensateRG="yes" AmberMixingCompensateBlue="yes" AmberColorR="255" AmberColorG="191" />
+ <initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" />
+ <shutter OpenValue="255" CloseValue="0" ChannelName="shutter"/>
+ <strobe OffValue="8" MinValue="16" MaxValue="131" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+ <gobo1rot LeftMinValue="0" LeftMaxValue="0" OffValue="128" RightMinValue="255" RightMaxValue="255" ChannelName="gobo1rot"/>
+ <gobo2rot LeftMinValue="0" LeftMaxValue="0" OffValue="128" RightMinValue="255" RightMaxValue="255" ChannelName="gobo2rot"/>
+ <prismarot LeftMinValue="8" LeftMaxValue="127" OffValue="252" RightMinValue="128" RightMaxValue="247" ChannelName="prismarot"/>
+ <prisma SingleValue="0" TripleValue="250"/>
+ <iris OpenValue="255" CloseValue="0" MinValue="0" MaxValue="255"/>
+ <form width="233" height="320">
+  <deviceimage top="8" left="8" width="64" height="64"/>
+  <devicename top="24" left="80"/>
+  <deviceadress top="8" left="80"/>
+  <devicedipswitch top="40" left="80"/>
+  <checkbox name="dauernebelnbutton" top="210" left="120" width="100" height="17" caption="Dauernebeln" action="dauernebeln" checked="false"/>
+  <slider name="volumeslider" top="110" left="10" width="210" height="20" action="volumechange" startvalue="0" endvalue="255" default="5"/>
+  <slider name="timer1slider" top="250" left="90" width="120" height="20" action="timer1change" startvalue="0" endvalue="255" default="0"/>
+  <slider name="timer2slider" top="280" left="90" width="120" height="20" action="timer2change" startvalue="0" endvalue="255" default="0"/>
+  <label name="Label1" top="90" left="10" width="68" height="13" caption="Nebelausstoß:"/>
+  <label name="Label2_933" top="250" left="20" width="35" height="13" caption="Timer 1"/>
+  <label name="Label3_566" top="290" left="20" width="35" height="13" caption="Timer 2"/>
+  <button name="fullbtn" top="140" left="170" width="50" height="30" action="fullbtnclick" caption="100%"/>
+  <button name="offbtn" top="140" left="10" width="50" height="30" action="offbtnclick" caption="Aus"/>
+  <button name="halfbtn" top="140" left="120" width="40" height="30" action="halfbtnclick" caption="50%"/>
+  <button name="minbtn" top="140" left="70" width="40" height="30" action="mintbtnclick" caption="5%"/>
+  <button name="nebelnan" top="200" left="20" width="80" height="30" action="nebelnan" caption="Nebeln AN"/>
+ </form>
+ <code>
+  unit antarim10;
+
+  interface
+
+  procedure InitDevice(Device: String);
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+  procedure volumechange;
+  procedure offbtnclick;
+  procedure halfbtnclick;
+  procedure fullbtnclick;
+  procedure mintbtnclick;
+  procedure nebelnan;
+  procedure dauernebeln;
+  procedure timer1change;
+  procedure timer2change;
+
+  implementation
+
+var
+	dontsetslider : boolean;
+  dontsetbox : boolean;
+
+  procedure InitDevice(Device: String);
+  begin
+    // diese Funktion wird für alle Geräte diesen Typs beim ersten Start des PC_DIMMERs ausgeführt.
+  end;
+  procedure FormShow;
+  begin
+  end;
+  procedure FormRefresh(channel:Integer);
+	var
+		wert:integer;
+	
+  begin
+		if (channel == 0) then
+		begin
+			if true then //not dontsetslider then
+			begin
+				wert := get_channel('dimmer');
+				volumeslider.position:=wert;
+			end;
+		end
+		else if (channel == 1) then
+		begin
+			if  true then//not dontsetbox then
+			begin
+	 		if (wert >= 128) then
+		 		begin
+					 dauernebelnbutton.Checked := true;
+				 end
+				 else	
+				 begin			 	
+					 dauernebelnbutton.Checked := false;
+				 end;
+			 end;
+		end;
+		
+	//	dontsetslider := false;
+	//	dontsetbox := false;
+
+  end;
+  procedure FormClose;
+  begin
+    // diese Funktion wird bei jedem Schließen der Form ausgeführt.
+  end;
+  procedure volumechange;
+  begin
+    // dontsetslider:=true;
+		set_channel('dimmer',volumeslider.position,volumeslider.position,0);
+  end;
+  procedure offbtnclick;
+  begin
+		set_channel('dimmer',0,0,0);
+  end;
+  procedure halfbtnclick;
+  begin
+		set_channel('dimmer',127,127,0);
+  end;
+  procedure fullbtnclick;
+  begin
+		set_channel('dimmer',255,255,0);
+  end;
+  procedure mintbtnclick;
+  begin
+		set_channel('dimmer',6,6,0);
+  end;
+  procedure nebelnan;
+begin
+		set_channel('SHUTTER',255,255,0);
+		set_channel('SHUTTER',0,0,0,1000);
+end;
+  procedure dauernebeln;
+var
+	wert:integer;
+  begin
+  		wert := get_channel('SHUTTER');
+	    if (wert >= 128) then
+		 	begin
+				set_channel('SHUTTER',0,0,0);
+	    end
+	    else
+			begin				 	
+				set_channel('SHUTTER',255,255,0);
+			 end;
+  end;
+  procedure timer1change;
+  begin
+    // dontsetslider:=true;
+		set_channel('SPECIAL1',timer1slider.position,timer1slider.position,0);
+  end;
+  procedure timer2change;
+
+  begin
+    // dontsetslider:=true;
+    
+		set_channel('SPECIAL2',timer2slider.position,timer2slider.position,0);
+
+  end;
+  end.
+ </code>
+</device>

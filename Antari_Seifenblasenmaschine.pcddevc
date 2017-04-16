@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="par56silber.png">
+ <information id="PC_DIMMER">
+ <name>B200</name>
+ <vendor>Antari</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>Antari B 200 DMX Seifenbalsenmaschine</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Ausstoß" fade="no" type="shutter"/>
+ </channels>
+ <initvalues ch0="-1" />
+ <shutter OpenValue="255" CloseValue="0" ChannelName="shutter"/>
+
+ <form width="100" height="130">
+  <deviceimage top="0" left="0" width="0" height="0"/>
+  <devicename top="10" left="10"/>
+  <deviceadress top="30" left="10"/>
+  <button name="btn_on" top="50" left="10" width="80" height="30" action="SHUTTERon" caption="Ausstoß an"/>
+  <button name="btn_off" top="90" left="10" width="80" height="30" action="SHUTTERoff" caption="Ausstoß aus"/>
+ </form>
+ 
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+	  procedure InitDevice(Device: String);
+	  procedure FormShow;
+	  procedure FormRefresh(channel:Integer);
+	  procedure FormClose;
+	  procedure SHUTTERon;
+	  procedure SHUTTERoff;
+
+	  implementation
+
+	  procedure InitDevice(Device: String);  begin end;
+	  procedure FormShow;  begin  end;
+	  procedure FormRefresh(channel:Integer);  begin end;
+	  procedure FormClose;  begin end;
+	  
+	  procedure SHUTTERon;
+	  begin
+		set_channel('SHUTTER',-1,255,0,0);
+	  end;
+	  
+	  procedure SHUTTERoff;
+	  begin
+		set_channel('SHUTTER',-1,0,0,0);
+	  end;
+  
+  end.
+ </code>
+</device>

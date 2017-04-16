@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="64 x 64\stroboskop.png">
+ <information id="PC_DIMMER">
+ <name>Superstrobe 2700 DMX</name>
+ <vendor>Eurolite</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>Stroboskop mit Kanal 1 Frequenz, Kanal 2 Helligkeit</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Frequenz" fade="yes" type="shutter"/>
+  <function channel="1" minvalue="0" maxvalue="255" name="Helligkeit" fade="yes" type="dimmer"/>
+ </channels>
+
+ <initvalues ch0="-1" ch1="-1" />
+ <shutter OpenValue="255" CloseValue="0" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+
+ <form width="241" height="180">
+  <deviceimage top="8" left="8" width="64" height="64"/>
+  <devicename top="24" left="80"/>
+  <deviceadress top="8" left="80"/>
+  <devicedipswitch top="40" left="80"/>
+  <slider name="SHUTTERslider0" top="96" left="8" width="217" height="17" action="SHUTTERchange" startvalue="0" endvalue="255" default="0"/>
+  <slider name="DIMMERslider1" top="136" left="8" width="217" height="17" action="DIMMERchange" startvalue="0" endvalue="255" default="0"/>
+  <label name="SHUTTERlbl0" top="80" left="8" width="44" height="13" caption="Frequenz"/>
+  <label name="DIMMERlbl1" top="120" left="8" width="43" height="13" caption="Helligkeit"/>
+ </form>
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+  procedure InitDevice(Device: String);
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+  procedure SHUTTERchange;
+  procedure DIMMERchange;
+
+  implementation
+
+  var
+   DontRefresh:boolean;
+
+  procedure InitDevice(Device: String);
+  begin
+  end;
+  procedure FormShow;
+  begin
+  end;
+  procedure FormRefresh(channel:Integer);
+  var
+    Value:integer;
+    r,phi,temp:Double;
+  begin
+    if not DontRefresh then
+    case channel of
+      0:
+      begin
+        SHUTTERslider0.position:=get_channel('SHUTTER');
+      end;
+      1:
+      begin
+        DIMMERslider1.position:=get_channel('DIMMER');
+      end;
+    end;
+    DontRefresh:=false;
+  end;
+  procedure FormClose;
+  begin
+  end;
+  procedure SHUTTERchange;
+  begin
+    DontRefresh:=true;
+
+    set_channel('SHUTTER',-1,SHUTTERslider0.position,0);
+  end;
+  procedure DIMMERchange;
+  begin
+    DontRefresh:=true;
+
+    set_channel('DIMMER',-1,DIMMERslider1.position,0);
+  end;
+  end.
+ </code>
+</device>
