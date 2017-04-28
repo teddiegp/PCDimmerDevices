@@ -1,0 +1,458 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="par56silber.png">
+	<information id="PC_DIMMER">
+		<name>TourSpot 60</name>
+		<vendor>Expolite</vendor>
+		<author>Eddie Greiner-Petter</author>
+		<description>Expolite Tour Spot 60</description>
+	</information>
+
+	<channels>
+		<function channel="0"  minvalue="0" maxvalue="245" name="Shutter"	fade="yes" type="shutter"/>
+		<function channel="1"  minvalue="0" maxvalue="255" name="DIMMER"	fade="yes" type="dimmer"/>
+		<function channel="2"  minvalue="0" maxvalue="255" name="colorwheel"	fade="no"  type="color1"/>
+		<function channel="3"  minvalue="0" maxvalue="255" name="Gobo"		fade="no"  type="gobo1"/>
+		<function channel="4"  minvalue="0" maxvalue="255" name="Gobo Rotation"	fade="yes" type="gobo1rot"/>
+		<function channel="5"  minvalue="0" maxvalue="255" name="Fokus"		fade="yes" type="focus"/>
+		<function channel="6"  minvalue="0" maxvalue="255" name="Prisma"	fade="yes" type="prisma"/>
+		<function channel="7"  minvalue="0" maxvalue="255" name="Pan"		fade="yes" type="pan"/>
+		<function channel="8"  minvalue="0" maxvalue="255" name="Panfine"	fade="yes" type="panfine"/>
+		<function channel="9"  minvalue="0" maxvalue="255" name="Tilt"		fade="yes" type="tilt"/>
+		<function channel="10" minvalue="0" maxvalue="255" name="Tiltfine"	fade="yes" type="tiltfine"/>
+		<function channel="11" minvalue="0" maxvalue="255" name="Speed"		fade="yes" type="speed"/>
+	</channels>
+
+	<initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" ch4="-1" ch5="-1" ch6="-1" ch7="-1" ch8="-1" ch9="-1" ch10="-1" ch11="-1" />
+
+	<shutter OpenValue="245" CloseValue="0" ChannelName="shutter"/>
+	<strobe OffValue="245" MinValue="40" MaxValue="240" ChannelName="shutter"/>
+
+	<dimmer OffValue="0" MaxValue="255"/>
+
+	<gobo1rot LeftMinValue="128" LeftMaxValue="191" OffValue="50" RightMinValue="192" RightMaxValue="255" ChannelName="gobo1rot"/>
+
+	<prisma SingleValue="20" TripleValue="139"/>
+
+	<prismarot LeftMinValue="140" LeftMaxValue="197" OffValue="0" RightMinValue="198" RightMaxValue="255" ChannelName="prisma"/>
+
+	<form width="500" height="360">
+		<!-- That's actually not as much shit as it looks on the first glance:
+		     When not specifying the deviceimage element, it get's shown in the
+		     background (just as big and distressing as anyhow possible). -->
+		<deviceimage top="0" left="0" width="0" height="0"/>
+
+		<!-- START of HEADER -->
+		<deviceadress top="10" left="10"/>
+		<devicename top="10" left="250"/>
+		<line name="WhyDoLinesNeedNames" top="25" left="0" width="500" height="1" />
+		<!-- END of HEADER -->
+
+		<!-- START of LEFT side-->
+		<label name="SHUTTERlbl"	top="30"  left="10" width="100" height="15" caption="Shutter"/>
+		<slider name="SHUTTERslider0"	top="46"  left="10" width="230" height="20" action="SHUTTERchange" startvalue="0" endvalue="245" default="0"/>
+
+		<label name="DIMMERlbl"		top="70" left="10" width="100" height="15" caption="Dimmer"/>
+		<slider name="DIMMERslider1"	top="86" left="10" width="230" height="20" action="DIMMERchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="GOBO1ROTlbl"	top="110" left="10" width="100" height="15" caption="Gobo Rotation"/>
+		<slider name="GOBO1ROTslider4"	top="126" left="10" width="230" height="20" action="GOBO1ROTchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="FOCUSlbl"		top="150" left="10" width="100" height="15" caption="Fokus"/>
+		<slider name="FOCUSslider5"	top="166" left="10" width="230" height="20" action="FOCUSchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="PRISMAlbl"		top="190" left="10" width="100" height="15" caption="Prisma"/>
+		<slider name="PRISMAslider6"	top="206" left="10" width="230" height="20" action="PRISMAchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="SPEEDlbl"		top="230" left="10" width="100" height="15" caption="Speed"/>
+		<slider name="SPEEDslider11"	top="246" left="10" width="230" height="20" action="SPEEDchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="COLORlbl"		top="270" left="10" width="100" height="15" caption="Color" />
+		<dropdown name="COLORdropdown"	top="286" left="10" width="230" height="20" action="COLORchange">
+			<item caption="Open" />
+			<item caption="Color 1" />
+			<item caption="Color 2" />
+			<item caption="Color 3" />
+			<item caption="Color 4" />
+			<item caption="Color 5" />
+			<item caption="Color 6" />
+			<item caption="Rainbow clockwise, speed fastest" />
+			<item caption="Rainbow clockwise, speed fast" />
+			<item caption="Rainbow clockwise, speed slow" />
+			<item caption="Rainbow clockwise, speed slowest" />
+			<item caption="Rainbow counterclockwise, speed slowest" />
+			<item caption="Rainbow counterclockwise, speed slow" />
+			<item caption="Rainbow counterclockwise, speed fast" />
+			<item caption="Rainbow counterclockwise, speed fastest" />
+		</dropdown>
+
+		<label name="GOBOlbl"		top="310" left="10" width="100" height="15" caption="Gobo" />
+		<dropdown name="GOBOdropdown"	top="326" left="10" width="230" height="20" action="GOBOchange">
+			<item caption="Open" />
+			<item caption="Gobo 1" />
+			<item caption="Gobo 2" />
+			<item caption="Gobo 3" />
+			<item caption="Gobo 4" />
+			<item caption="Gobo 5" />
+			<item caption="Gobo 6" />
+			<item caption="Gobo 7" />
+			<item caption="Rainbow clockwise, speed fastest" />
+			<item caption="Rainbow clockwise, speed fast" />
+			<item caption="Rainbow clockwise, speed slow" />
+			<item caption="Rainbow clockwise, speed slowest" />
+			<item caption="Rainbow counterclockwise, speed slowest" />
+			<item caption="Rainbow counterclockwise, speed slow" />
+			<item caption="Rainbow counterclockwise, speed fast" />
+			<item caption="Rainbow counterclockwise, speed fastest" />
+		</dropdown>
+		<!-- END of LEFT side -->
+
+		<!-- START of RIGHT side -->
+		<position top="30" left="250" height="230" width="230" />
+
+		<label name="PANFINElbl8"	top="270" left="250" width="100"  height="15" caption="Panfine"/>
+		<slider name="PANFINEslider8"	top="286" left="250" width="230" height="20" action="PANFINEchange" startvalue="0" endvalue="255" default="0"/>
+
+		<label name="TILTFINElbl10"	top="310" left="250" width="100"  height="15" caption="Tiltfine"/>
+		<slider name="TILTFINEslider10"	top="326" left="250" width="230" height="20" action="TILTFINEchange" startvalue="0" endvalue="255" default="0"/>
+		<!-- END of RIGHT side -->
+	</form>
+
+	<code>
+		unit NewDeviceUnit;
+
+		interface
+
+			procedure InitDevice(Device: String);
+			procedure FormShow;
+			procedure FormRefresh(channel:Integer);
+			procedure FormClose;
+			procedure SHUTTERchange;
+			procedure DIMMERchange;
+			procedure COLORChange;
+			procedure GOBOchange;
+			procedure GOBO1ROTchange;
+			procedure FOCUSchange;
+			procedure PRISMAchange;
+			procedure PositionXYChange(Top, Left: Integer);
+			procedure PANFINEchange;
+			procedure TILTFINEchange;
+			procedure SPEEDchange;
+
+		implementation
+
+			var DontRefresh:boolean;
+
+			procedure InitDevice(Device: String);
+			begin
+			end;
+
+			procedure FormShow;
+			begin
+			end;
+
+			procedure FormRefresh(channel:Integer);
+			var
+				Value:integer;
+				r,phi,temp:Double;
+			begin
+				if not DontRefresh then
+					case channel of
+						0:
+						begin
+							SHUTTERslider0.position:=get_channel('SHUTTER');
+						end;
+
+						1:
+						begin
+							DIMMERslider1.position:=get_channel('DIMMER');
+						end;
+
+						2:
+						begin
+							value:=get_channel('color1');
+							case value of
+								0..18: COLORdropdown.itemindex:=0;
+								19..37: COLORdropdown.itemindex:=1;
+								38..56: COLORdropdown.itemindex:=2;
+								57..75: COLORdropdown.itemindex:=3;
+								76..94: COLORdropdown.itemindex:=4;
+								95..113: COLORdropdown.itemindex:=5;
+								114..127: COLORdropdown.itemindex:=6;
+								128..140: COLORdropdown.itemindex:=7;
+								141..160: COLORdropdown.itemindex:=8;
+								161..175: COLORdropdown.itemindex:=9;
+								176..192: COLORdropdown.itemindex:=10;
+								193..205: COLORdropdown.itemindex:=11;
+								206..225: COLORdropdown.itemindex:=12;
+								226..245: COLORdropdown.itemindex:=13;
+								246..255: COLORdropdown.itemindex:=14;
+							end;
+						end;
+
+						3:
+						begin
+							value:=get_channel('gobo1');
+							case value of
+								0..15: GOBOdropdown.itemindex:=0;
+								16..31: GOBOdropdown.itemindex:=1;
+								32..47: GOBOdropdown.itemindex:=2;
+								48..63: GOBOdropdown.itemindex:=3;
+								64..79: GOBOdropdown.itemindex:=4;
+								80..95: GOBOdropdown.itemindex:=5;
+								96..111: GOBOdropdown.itemindex:=6;
+								112..127: GOBOdropdown.itemindex:=7;
+								128..140: GOBOdropdown.itemindex:=8;
+								141..160: GOBOdropdown.itemindex:=9;
+								161..175: GOBOdropdown.itemindex:=10;
+								176..192: GOBOdropdown.itemindex:=11;
+								193..205: GOBOdropdown.itemindex:=12;
+								206..225: GOBOdropdown.itemindex:=13;
+								226..245: GOBOdropdown.itemindex:=14;
+								246..255: GOBOdropdown.itemindex:=15;
+							end;
+						end;
+
+						4:
+						begin
+							GOBO1ROTslider4.position:=get_channel('GOBO1ROT');
+						end;
+
+						5:
+						begin
+							FOCUSslider5.position:=get_channel('FOCUS');
+						end;
+
+						6:
+						begin
+							PRISMAslider6.position:=get_channel('PRISMA');
+						end;
+
+						7:
+						begin
+							if usemhcontrol.checked then
+								begin
+									// Moving-Head-Steuerung
+									temp:=get_channel('tilt')+(get_channel('tiltfine')/256);
+									case round(temp) of
+										0..127: r:=((127-temp)/127);
+										128..255: r:=((temp-128)/127);
+									end;
+									phi:=(get_channel('pan')+(get_channel('panfine')/256))/255*6.283185307179586476925286766559;	//(X/255)*PI
+									PositionXY.Left:=round(r*sin(phi)*(Fadenkreuz.Width/2)+(Fadenkreuz.Width/2)-(PositionXY.Width div 2));
+									PositionXY.Top:=round(r*cos(phi)*(Fadenkreuz.Height/2)+(Fadenkreuz.Height/2)-(PositionXY.Width div 2));
+								end
+							else
+								begin
+									// Scanner-Steuerung
+									PositionXY.Left:=round(Fadenkreuz.Width * (get_channel('pan')+get_channel('panfine')/256)/255)-(PositionXY.Width div 2);
+									PositionXY.Top:=round(Fadenkreuz.Height * (get_channel('tilt')+get_channel('tiltfine')/256)/255)-(PositionXY.Height div 2);
+								end;
+						end;
+
+						8:
+						begin
+							PANFINEslider8.position:=get_channel('PANFINE');
+						end;
+
+						9:
+						begin
+							if usemhcontrol.checked then
+								begin
+									// Moving-Head-Steuerung
+									temp:=get_channel('tilt')+(get_channel('tiltfine')/256);
+									case round(temp) of
+										0..127: r:=((127-temp)/127);
+										128..255: r:=((temp-128)/127);
+									end;
+									phi:=(get_channel('pan')+(get_channel('panfine')/256))/255*6.283185307179586476925286766559;	//(X/255)*PI
+									PositionXY.Left:=round(r*sin(phi)*(Fadenkreuz.Width/2)+(Fadenkreuz.Width/2)-(PositionXY.Width div 2));
+									PositionXY.Top:=round(r*cos(phi)*(Fadenkreuz.Height/2)+(Fadenkreuz.Height/2)-(PositionXY.Width div 2));
+								end
+							else
+								begin
+									// Scanner-Steuerung
+									PositionXY.Left:=round(Fadenkreuz.Width * (get_channel('pan')+get_channel('panfine')/256)/255)-(PositionXY.Width div 2);
+									PositionXY.Top:=round(Fadenkreuz.Height * (get_channel('tilt')+get_channel('tiltfine')/256)/255)-(PositionXY.Height div 2);
+								end;
+						end;
+
+						10:
+						begin
+							TILTFINEslider10.position:=get_channel('TILTFINE');
+						end;
+
+						11:
+						begin
+							SPEEDslider11.position:=get_channel('SPEED');
+						end;
+					end;
+					DontRefresh:=false;
+			end;
+
+			procedure FormClose;
+			begin
+			end;
+
+			procedure SHUTTERchange;
+			begin
+				DontRefresh:=true;
+				set_channel('SHUTTER',-1,SHUTTERslider0.position,0);
+			end;
+
+			procedure DIMMERchange;
+			begin
+				DontRefresh:=true;
+				set_channel('DIMMER',-1,DIMMERslider1.position,0);
+			end;
+
+			procedure COLORChange;
+			begin
+				case COLORdropdown.itemindex of
+					0: set_channel('color1', -1, 9, 0);
+					1: set_channel('color1', -1, 28, 0);
+					2: set_channel('color1', -1, 47, 0);
+					3: set_channel('color1', -1, 66, 0);
+					4: set_channel('color1', -1, 85, 0);
+					5: set_channel('color1', -1, 104, 0);
+					6: set_channel('color1', -1, 123, 0);
+					7: set_channel('color1', -1, 130, 0);
+					8: set_channel('color1', -1, 150, 0);
+					9: set_channel('color1', -1, 170, 0);
+					10: set_channel('color1', -1, 190, 0);
+					11: set_channel('color1', -1, 195, 0);
+					12: set_channel('color1', -1, 215, 0);
+					13: set_channel('color1', -1, 235, 0);
+					14: set_channel('color1', -1, 255, 0);
+				end;
+			end;
+
+			procedure GOBOchange;
+			begin
+				case GOBOdropdown.itemindex of
+					0: set_channel('gobo1', -1, 8, 0);
+					1: set_channel('gobo1', -1, 24, 0);
+					2: set_channel('gobo1', -1, 40, 0);
+					3: set_channel('gobo1', -1, 56, 0);
+					4: set_channel('gobo1', -1, 72, 0);
+					5: set_channel('gobo1', -1, 88, 0);
+					6: set_channel('gobo1', -1, 104, 0);
+					7: set_channel('gobo1', -1, 120, 0);
+					8: set_channel('gobo1', -1, 130, 0);
+					9: set_channel('gobo1', -1, 150, 0);
+					10: set_channel('gobo1', -1, 170, 0);
+					11: set_channel('gobo1', -1, 190, 0);
+					12: set_channel('gobo1', -1, 195, 0);
+					13: set_channel('gobo1', -1, 215, 0);
+					14: set_channel('gobo1', -1, 235, 0);
+					15: set_channel('gobo1', -1, 255, 0);
+				end;
+			end;
+
+			procedure GOBO1ROTchange;
+			begin
+				DontRefresh:=true;
+				set_channel('GOBO1ROT',-1,GOBO1ROTslider4.position,0);
+			end;
+
+			procedure FOCUSchange;
+			begin
+				DontRefresh:=true;
+				set_channel('FOCUS',-1,FOCUSslider5.position,0);
+			end;
+
+			procedure PRISMAchange;
+			begin
+				DontRefresh:=true;
+				set_channel('PRISMA',-1,PRISMAslider6.position,0);
+			end;
+
+			procedure PositionXYChange(Top, Left: Integer);
+			var
+				phi,r,x,y:Double;
+				pan, tilt, panfine, tiltfine:Double;
+			begin
+				if usemhcontrol.checked then
+					begin
+						// Moving-Head-Steuerung (Polarkoordinaten)
+						x:=((PositionXY.Left+(PositionXY.Width div 2)-(fadenkreuz.Width/2))/fadenkreuz.Width)*2;	//-1..0..1
+						y:=((PositionXY.Top+(PositionXY.Height div 2)-(fadenkreuz.Width/2))/fadenkreuz.Height)*2;	//-1..0..1
+						r:=sqrt(x*x+y*y);
+
+						if (r>0) then
+							begin
+								if (y>=0) then	phi:=arccos(x/r)
+								else		phi:=6.283185307179586476925286766559-arccos(x/r);
+							end
+						else
+							phi:=64;
+
+						r:=128-((r/2)*255);
+						phi:=(phi/6.283185307179586476925286766559)*255;
+
+						if 64>=phi then		phi:=phi+191
+						else			phi:=phi-64;
+
+						pan:=255-phi;
+						tilt:=255-r;
+					end
+				else
+					begin
+						// Scannersteuerung (Kartesische Koordinaten)
+						pan:=((PositionXY.Left+(PositionXY.Width div 2))/fadenkreuz.Width)*255;
+						tilt:=((PositionXY.Top+(PositionXY.Height div 2))/fadenkreuz.Height)*255;
+					end;
+
+				// Ausgabe
+				if panmirror.checked then
+					begin
+						dontrefresh:=true;
+						set_channel('pan',trunc(255-pan),trunc(255-pan),0);
+						dontrefresh:=true;
+						set_channel('panfine',trunc(frac(255-pan)*255),trunc(frac(255-pan)*255),0);
+					end
+				else
+					begin
+						dontrefresh:=true;
+						set_channel('pan',trunc(pan),trunc(pan),0);
+						dontrefresh:=true;
+						set_channel('panfine',trunc(frac(pan)*255),trunc(frac(pan)*255),0);
+					end;
+
+				if tiltmirror.checked then
+					begin
+						dontrefresh:=true;
+						set_channel('tilt',trunc(255-tilt),trunc(255-tilt),0);
+						dontrefresh:=true;
+						set_channel('tiltfine',trunc(frac(255-tilt)*255),trunc(frac(255-tilt)*255),0);
+					end
+				else
+					begin
+						dontrefresh:=true;
+						set_channel('tilt',trunc(tilt),trunc(tilt),0);
+						dontrefresh:=true;
+						set_channel('tiltfine',trunc(frac(tilt)*255),trunc(frac(tilt)*255),0);
+					end;
+			end;
+
+			procedure PANFINEchange;
+			begin
+				DontRefresh:=true;
+				set_channel('PANFINE',-1,PANFINEslider8.position,0);
+			end;
+
+			procedure TILTFINEchange;
+			begin
+				DontRefresh:=true;
+				set_channel('TILTFINE',-1,TILTFINEslider10.position,0);
+			end;
+
+
+			procedure SPEEDchange;
+			begin
+				DontRefresh:=true;
+				set_channel('SPEED',-1,SPEEDslider11.position,0);
+			end;
+
+		end.
+	</code>
+</device>
