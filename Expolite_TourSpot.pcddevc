@@ -47,7 +47,7 @@
 		<line name="WhyDoLinesNeedNames" top="25" left="0" width="500" height="1" />
 		<!-- END of HEADER -->
 
-		<!-- START of LEFT side-->
+		<!-- START of LEFT side -->
 		<label name="SHUTTERlbl"	top="30"  left="10" width="100" height="15" caption="Shutter"/>
 		<slider name="SHUTTERslider0"	top="46"  left="10" width="230" height="20" action="SHUTTERchange" startvalue="0" endvalue="245" default="0"/>
 
