@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="64 x 64\lichtorgel.png">
+ <information id="PC_DIMMER">
+ <name>xBrick Quad 16x8 6ch</name>
+ <vendor>Stairville</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>R,G,B,W,Dimmer,Flash</description>
+ </information>
+ <channels>
+  <function channel="0" minvalue="0" maxvalue="255" name="Rot" fade="yes" type="r"/>
+  <function channel="1" minvalue="0" maxvalue="255" name="Grün" fade="yes" type="g"/>
+  <function channel="2" minvalue="0" maxvalue="255" name="Blau" fade="yes" type="b"/>
+  <function channel="3" minvalue="0" maxvalue="255" name="Weiß" fade="yes" type="w" />
+  <function channel="4" minvalue="0" maxvalue="255" name="Helligkeit" fade="yes" type="dimmer"/>
+  <function channel="5" minvalue="0" maxvalue="255" name="Stroboskopeffekt" fade="yes" type="shutter"/>
+ </channels>
+ <initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" ch4="-1" />
+
+ <shutter OpenValue="255" CloseValue="0" ChannelName="dimmer"/>
+ <strobe OffValue="0" MinValue="11" MaxValue="255" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+
+ <form width="200" height="380">
+  <deviceimage     top="10"  left="10" width="64" height="64"/>
+  <deviceadress    top="10"  left="80"/>
+  <devicename      top="25"  left="80"/>
+  <devicedipswitch top="40"  left="80"/>
+  <colorpicker     top="80"  left="10" />
+  <button          top="220" left="10" width="180" height="30" name="SwitchColorPickerBtn" action="SwitchColorPicker" caption="Andere Farbauswahl"/>
+  <label           top="255" left="10" width="50"  height="15" name="WHITElbl" caption="Weiß:"/>
+  <slider          top="270" left="10" width="180" height="20" name="WHITEslider" action="WHITEchange" startvalue="0" endvalue="255" default="0"/>
+  <label           top="295" left="10" width="50"  height="15" name="DIMMERlbl" caption="Helligkeit:"/>
+  <slider          top="310" left="10" width="180" height="20" name="DIMMERslider" action="DIMMERchange" startvalue="0" endvalue="255" default="0"/>
+  <label           top="335" left="10" width="60"  height="15" name="SHUTTERlbl" caption="Stroboskop:"/>
+  <slider          top="350" left="10" width="180" height="20" name="SHUTTERslider" action="SHUTTERchange" startvalue="0" endvalue="255" default="0"/>
+ </form>
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+  procedure InitDevice(Device: String);
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+  procedure ColorPickerChange(R, G, B: Byte);
+  procedure SwitchColorPicker;
+  procedure WHITEchange;
+  procedure DIMMERchange;
+  procedure SHUTTERchange;
+
+  implementation
+
+  var
+   DontRefresh:boolean;
+
+  procedure InitDevice(Device: String);
+  begin
+  end;
+  procedure FormShow;
+  begin
+  end;
+  procedure FormRefresh(channel:Integer);
+  var
+    Value:integer;
+    r,phi,temp:Double;
+  begin
+    if not DontRefresh then
+    case channel of
+      0:begin end;
+      1:begin end;
+      2:begin end;
+      3:
+      begin
+	WHITEslider.position:=get_channel('w')
+      end;
+      4:
+      begin
+        DIMMERslider.position:=get_channel('DIMMER')
+      end;
+      5:
+      begin
+        SHUTTERslider.position:=get_channel('SHUTTER')
+      end;
+    end;
+    DontRefresh:=false;
+  end;
+  procedure FormClose;
+  begin
+  end;
+  procedure ColorPickerChange(R, G, B: Byte);
+  begin
+    set_channel('r',-1,r,0);
+    set_channel('g',-1,g,0);
+    set_channel('b',-1,b,0);
+  end;
+  procedure SwitchColorPicker;
+  begin
+    if colorpicker.visible then
+    begin
+      colorpicker.visible:=false;
+      colorpicker2.visible:=true;
+    end else
+    begin
+      colorpicker.visible:=true;
+      colorpicker2.visible:=false;
+    end;
+  end;
+  procedure WHITEchange;
+  begin
+    DontRefresh:=true;
+    set_channel('w',-1,WHITEslider.position,0);
+  end;
+  procedure DIMMERchange;
+  begin
+    DontRefresh:=true;
+    set_channel('DIMMER',-1,DIMMERslider.position,0);
+  end;
+  procedure SHUTTERchange;
+  begin
+    DontRefresh:=true;
+    set_channel('SHUTTER',-1,SHUTTERslider.position,0);
+  end;
+  end.
+ </code>
+</device>

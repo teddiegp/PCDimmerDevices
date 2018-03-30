@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<device image="64 x 64\lichtorgel.png">
+ <information id="PC_DIMMER">
+ <name>xBrick Quad 16x8 16ch</name>
+ <vendor>Stairville</vendor>
+ <author>Eddie Greiner-Petter</author>
+ <description>4 Sektionen, jeweils R,G,B,W</description>
+ </information>
+ <channels>
+  <function channel="0"  minvalue="0" maxvalue="255" name="1 Rot"  fade="yes" type="r1"/>
+  <function channel="1"  minvalue="0" maxvalue="255" name="1 Grün" fade="yes" type="g1"/>
+  <function channel="2"  minvalue="0" maxvalue="255" name="1 Blau" fade="yes" type="b1"/>
+  <function channel="3"  minvalue="0" maxvalue="255" name="1 Weiß" fade="yes" type="w1" />
+  <function channel="4"  minvalue="0" maxvalue="255" name="2 Rot"  fade="yes" type="r2"/>
+  <function channel="5"  minvalue="0" maxvalue="255" name="2 Grün" fade="yes" type="g2"/>
+  <function channel="6"  minvalue="0" maxvalue="255" name="2 Blau" fade="yes" type="b2"/>
+  <function channel="7"  minvalue="0" maxvalue="255" name="2 Weiß" fade="yes" type="w2" />
+  <function channel="8"  minvalue="0" maxvalue="255" name="3 Rot"  fade="yes" type="r3"/>
+  <function channel="9"  minvalue="0" maxvalue="255" name="3 Grün" fade="yes" type="g3"/>
+  <function channel="10" minvalue="0" maxvalue="255" name="3 Blau" fade="yes" type="b3"/>
+  <function channel="11" minvalue="0" maxvalue="255" name="3 Weiß" fade="yes" type="w3" />
+  <function channel="12" minvalue="0" maxvalue="255" name="4 Rot"  fade="yes" type="r4"/>
+  <function channel="13" minvalue="0" maxvalue="255" name="4 Grün" fade="yes" type="g4"/>
+  <function channel="14" minvalue="0" maxvalue="255" name="4 Blau" fade="yes" type="b4"/>
+  <function channel="15" minvalue="0" maxvalue="255" name="4 Weiß" fade="yes" type="w4" />
+ </channels>
+ <initvalues ch0="-1" ch1="-1" ch2="-1" ch3="-1" ch4="-1" />
+
+ <shutter OpenValue="255" CloseValue="0" ChannelName="dimmer"/>
+ <strobe OffValue="0" MinValue="11" MaxValue="255" ChannelName="shutter"/>
+ <dimmer OffValue="0" MaxValue="255"/>
+
+ <form width="400" height="520">
+  <deviceimage     top="10"  left="10" width="64" height="64"/>
+  <devicedipswitch top="25"  left="80"/>
+  <deviceadress    top="80"  left="10"/>
+  <devicename      top="100" left="10"/>
+  <colorpicker     top="20"  left="210"/>
+  <button          top="125" left="10" width="180" height="30" name="SwitchColorPickerBtn" action="SwitchColorPicker" caption="Andere Farbauswahl"/>
+
+  <label           top="185" left="10" width="50"  height="15" name="r1lbl" caption="Sektion 1 Rot:"/>
+  <slider          top="200" left="10" width="180" height="20" name="r1slider" action="r1change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="225" left="10" width="50"  height="15" name="g1lbl" caption="Sektion 1 Grün:"/>
+  <slider          top="240" left="10" width="180" height="20" name="g1slider" action="g1change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="265" left="10" width="50"  height="15" name="b1lbl" caption="Sektion 1 Blau:"/>
+  <slider          top="280" left="10" width="180" height="20" name="b1slider" action="b1change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="305" left="10" width="50"  height="15" name="w1lbl" caption="Sektion 1 Weiß:"/>
+  <slider          top="320" left="10" width="180" height="20" name="w1slider" action="w1change" startvalue="0" endvalue="255" default="0"/>
+
+  <label           top="185" left="210" width="50"  height="15" name="r2lbl" caption="Sektion 2 Rot:"/>
+  <slider          top="200" left="210" width="180" height="20" name="r2slider" action="r2change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="225" left="210" width="50"  height="15" name="g2lbl" caption="Sektion 2 Grün:"/>
+  <slider          top="240" left="210" width="180" height="20" name="g2slider" action="g2change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="265" left="210" width="50"  height="15" name="b2lbl" caption="Sektion 2 Blau:"/>
+  <slider          top="280" left="210" width="180" height="20" name="b2slider" action="b2change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="305" left="210" width="50"  height="15" name="w2lbl" caption="Sektion 2 Weiß:"/>
+  <slider          top="320" left="210" width="180" height="20" name="w2slider" action="w2change" startvalue="0" endvalue="255" default="0"/>
+
+  <label           top="355" left="10" width="50"  height="15" name="r3lbl" caption="Sektion 3 Rot:"/>
+  <slider          top="370" left="10" width="180" height="20" name="r3slider" action="r3change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="395" left="10" width="50"  height="15" name="g3lbl" caption="Sektion 3 Grün:"/>
+  <slider          top="410" left="10" width="180" height="20" name="g3slider" action="g3change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="435" left="10" width="50"  height="15" name="b3lbl" caption="Sektion 3 Blau:"/>
+  <slider          top="450" left="10" width="180" height="20" name="b3slider" action="b3change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="475" left="10" width="50"  height="15" name="w3lbl" caption="Sektion 3 Weiß:"/>
+  <slider          top="490" left="10" width="180" height="20" name="w3slider" action="w3change" startvalue="0" endvalue="255" default="0"/>
+
+  <label           top="355" left="210" width="50"  height="15" name="r4lbl" caption="Sektion 4 Rot:"/>
+  <slider          top="370" left="210" width="180" height="20" name="r4slider" action="r4change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="395" left="210" width="50"  height="15" name="g4lbl" caption="Sektion 4 Grün:"/>
+  <slider          top="410" left="210" width="180" height="20" name="g4slider" action="g4change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="435" left="210" width="50"  height="15" name="b4lbl" caption="Sektion 4 Blau:"/>
+  <slider          top="450" left="210" width="180" height="20" name="b4slider" action="b4change" startvalue="0" endvalue="255" default="0"/>
+  <label           top="475" left="210" width="50"  height="15" name="w4lbl" caption="Sektion 4 Weiß:"/>
+  <slider          top="490" left="210" width="180" height="20" name="w4slider" action="w4change" startvalue="0" endvalue="255" default="0"/>
+ </form>
+ <code>
+  unit NewDeviceUnit;
+
+  interface
+
+  procedure InitDevice(Device: String);
+  procedure FormShow;
+  procedure FormRefresh(channel:Integer);
+  procedure FormClose;
+  procedure ColorPickerChange(R, G, B: Byte);
+  procedure SwitchColorPicker;
+  procedure r1change;
+  procedure g1change;
+  procedure b1change;
+  procedure w1change;
+  procedure r2change;
+  procedure g2change;
+  procedure b2change;
+  procedure w2change;
+  procedure r3change;
+  procedure g3change;
+  procedure b3change;
+  procedure w3change;
+  procedure r4change;
+  procedure g4change;
+  procedure b4change;
+  procedure w4change;
+
+  implementation
+
+  var
+   DontRefresh:boolean;
+
+  procedure InitDevice(Device: String);
+  begin
+  end;
+  procedure FormShow;
+  begin
+  end;
+  procedure FormRefresh(channel:Integer);
+  var
+    Value:integer;
+    r,phi,temp:Double;
+  begin
+    if not DontRefresh then
+    case channel of
+      0:
+      begin
+        r1slider.position:=get_channel('r1');
+      end;
+      1:
+      begin
+        g1slider.position:=get_channel('g1');
+      end;
+      2:begin
+        b1slider.position:=get_channel('b1');
+      end;
+      3:
+      begin
+        w1slider.position:=get_channel('w1');
+      end;
+      4:
+      begin
+        r2slider.position:=get_channel('r2');
+      end;
+      5:
+      begin
+        g2slider.position:=get_channel('g2');
+      end;
+      6:
+      begin
+        b2slider.position:=get_channel('b2');
+      end;
+      7:
+      begin
+        w2slider.position:=get_channel('w2');
+      end;
+      8:
+      begin
+        r3slider.position:=get_channel('r3');
+      end;
+      9:
+      begin
+        g3slider.position:=get_channel('g3');
+      end;
+      10:
+      begin
+        b3slider.position:=get_channel('b3');
+      end;
+      11:
+      begin
+        w3slider.position:=get_channel('w3');
+      end;
+      12:
+      begin
+        r4slider.position:=get_channel('r4');
+      end;
+      13:
+      begin
+        g4slider.position:=get_channel('g4');
+      end;
+      14:
+      begin
+        b4slider.position:=get_channel('b4');
+      end;
+      15:
+      begin
+        w4slider.position:=get_channel('w4');
+      end;
+    end;
+    DontRefresh:=false;
+  end;
+  procedure FormClose;
+  begin
+  end;
+  procedure ColorPickerChange(R, G, B: Byte);
+  begin
+    set_channel('r1',-1,r,0);
+    FormRefresh(0);
+    set_channel('g1',-1,g,0);
+    FormRefresh(1);
+    set_channel('b1',-1,b,0);
+    FormRefresh(2);
+    set_channel('r2',-1,r,0);
+    FormRefresh(4);
+    set_channel('g2',-1,g,0);
+    FormRefresh(5);
+    set_channel('b2',-1,b,0);
+    FormRefresh(6);
+    set_channel('r3',-1,r,0);
+    FormRefresh(8);
+    set_channel('g3',-1,g,0);
+    FormRefresh(9);
+    set_channel('b3',-1,b,0);
+    FormRefresh(10);
+    set_channel('r4',-1,r,0);
+    FormRefresh(12);
+    set_channel('g4',-1,g,0);
+    FormRefresh(13);
+    set_channel('b4',-1,b,0);
+    FormRefresh(14);
+  end;
+  procedure SwitchColorPicker;
+  begin
+    if colorpicker.visible then
+    begin
+      colorpicker.visible:=false;
+      colorpicker2.visible:=true;
+    end else
+    begin
+      colorpicker.visible:=true;
+      colorpicker2.visible:=false;
+    end;
+  end;
+  procedure r1change;
+  begin
+    DontRefresh:=true;
+    set_channel('r1',-1,r1slider.position,0);
+  end;
+  procedure g1change;
+  begin
+    DontRefresh:=true;
+    set_channel('g1',-1,g1slider.position,0);
+  end;
+  procedure b1change;
+  begin
+    DontRefresh:=true;
+    set_channel('b1',-1,b1slider.position,0);
+  end;
+  procedure w1change;
+  begin
+    DontRefresh:=true;
+    set_channel('w1',-1,w1slider.position,0);
+  end;
+  procedure r2change;
+  begin
+    DontRefresh:=true;
+    set_channel('r2',-1,r2slider.position,0);
+  end;
+  procedure g2change;
+  begin
+    DontRefresh:=true;
+    set_channel('g2',-1,g2slider.position,0);
+  end;
+  procedure b2change;
+  begin
+    DontRefresh:=true;
+    set_channel('b2',-1,b2slider.position,0);
+  end;
+  procedure w2change;
+  begin
+    DontRefresh:=true;
+    set_channel('w2',-1,w2slider.position,0);
+  end;
+  procedure r3change;
+  begin
+    DontRefresh:=true;
+    set_channel('r3',-1,r3slider.position,0);
+  end;
+  procedure g3change;
+  begin
+    DontRefresh:=true;
+    set_channel('g3',-1,g3slider.position,0);
+  end;
+  procedure b3change;
+  begin
+    DontRefresh:=true;
+    set_channel('b3',-1,b3slider.position,0);
+  end;
+  procedure w3change;
+  begin
+    DontRefresh:=true;
+    set_channel('w3',-1,w3slider.position,0);
+  end;
+  procedure r4change;
+  begin
+    DontRefresh:=true;
+    set_channel('r4',-1,r4slider.position,0);
+  end;
+  procedure g4change;
+  begin
+    DontRefresh:=true;
+    set_channel('g4',-1,g4slider.position,0);
+  end;
+  procedure b4change;
+  begin
+    DontRefresh:=true;
+    set_channel('b4',-1,b4slider.position,0);
+  end;
+  procedure w4change;
+  begin
+    DontRefresh:=true;
+    set_channel('w4',-1,w4slider.position,0);
+  end;
+  end.
+ </code>
+</device>
